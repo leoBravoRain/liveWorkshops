@@ -15,7 +15,7 @@ import OverviewWorkshop from "./components/overviewWorkshop.component";
 
 // firebase
 // import { auth } from "../../config/firebase";
-// import { fs } from "../../config/firebase";
+import { fs } from "../../config/firebase";
 
 // workshop mockup
 const _workshops = [
@@ -26,6 +26,10 @@ const _workshops = [
         "image": "https://images.yogaanytime.com/2017/12/13/large_sarah_170825_YA13140_content-19948.jpg?width=768",
         "teacherMobileNumber": "+56937827142",
         "category": "Deportes",
+        "schedule": [
+            "Lunes 8:00 a 9:30",
+            "Miercoles 8:00 a 9:30",
+        ]
     },
 
     {
@@ -35,6 +39,10 @@ const _workshops = [
         "image": "https://statics-cuidateplus.marca.com/sites/default/files/images/zumba.jpg",
         "teacherMobileNumber": "+56937827142",
         "category": "Deportes",
+        "schedule": [
+            "Lunes 8:00 a 9:30",
+            "Miercoles 8:00 a 9:30",
+        ]
     },
 
     {
@@ -44,6 +52,10 @@ const _workshops = [
         "image": "https://img.fotocommunity.com/guitar-man-ff55a084-e878-4372-a9a0-ee771a3a0fdc.jpg?height=1080",
         "teacherMobileNumber": "+56937827142",
         "category": "Musica",
+        "schedule": [
+            "Lunes 8:00 a 9:30",
+            "Miercoles 8:00 a 9:30",
+        ]
     }
 
 ];
@@ -68,54 +80,49 @@ class Home extends React.Component {
 
     componentDidMount() {
 
-        // categories
-        var categories = [];
         // courses by category
         var coursesByCategory = {};
 
         // get courses
-        
-        // iterate through each course
-        _workshops.forEach((workshop) => {
-            // console.log(workshop);
+        // get teachers courses
+        fs.collection('workshops')
+            // .where("author_ID", "==", user.uid)
+            .get()
+            .then(querySnapshot => {
 
-            // if category is already registered
-            if (workshop.category in coursesByCategory) {
-                
-                var tmp = coursesByCategory[workshop.category];
-                tmp.push(workshop);
-                coursesByCategory[workshop.category] = tmp;
+                var workshops = [];
 
-            }
+                querySnapshot.docs.forEach(doc => {
 
-            // if it is not
-            else {
-                coursesByCategory[workshop.category] = [workshop];
-            }
-        })
+                    const workshop = doc.data();
 
-        // console.log(coursesByCategory);
+                    // if category is already registered
+                    if (workshop.category in coursesByCategory) {
 
-        // Object.keys({}).map((category, index) => {
-        //     console.log(coursesByCategory[category]);
+                        var tmp = coursesByCategory[workshop.category];
+                        tmp.push(workshop);
+                        coursesByCategory[workshop.category] = tmp;
 
+                    }
 
-        // });
+                    // if it is not
+                    else {
+                        coursesByCategory[workshop.category] = [workshop];
+                    }
 
-        this.setState({
-            workshopsByCategory: coursesByCategory,
-            loading: false,
-        }, 
-        // () => {
-        //     // console.log(coursesByCategory);
+                });
 
-        //     Object.keys(this.state.workshopsByCategory).map((category, index) => {
-        //         console.log(coursesByCategory[category]);
+                 this.setState({
+                    workshopsByCategory: coursesByCategory,
+                    loading: false,
+                });
 
+            })
 
-        //     });
-        // });
-        );
+            .catch(e => {
+                // console.log("(createNewCourse) error trying to get the courses: " + e);
+                this.setState({ loading: false });
+            });
 
     }
 
@@ -131,9 +138,6 @@ class Home extends React.Component {
                 }}
             >
 
-                {/* big workshop */}
-
-
                 {/* workshops */}
                 <Container>
 
@@ -148,7 +152,7 @@ class Home extends React.Component {
                                 <Container>
 
                                     <OverviewWorkshop
-                                        workshop={this.state.workshopsByCategory[Object.keys(this.state.workshopsByCategory)[0]][0]}
+                                        workshop={this.state.workshopsByCategory[Object.keys(this.state.workshopsByCategory)[Math.floor(Math.random() * Object.keys(this.state.workshopsByCategory).length)]][0]}
                                         history={this.props.history}
                                     />
 

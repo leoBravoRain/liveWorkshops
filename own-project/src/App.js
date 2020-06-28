@@ -74,7 +74,7 @@ class App extends Component {
 
                 <Typography gutterBottom variant="h4" component="h2">
 
-                  Liwork!
+                  Livet!
 
                 </Typography>
 
