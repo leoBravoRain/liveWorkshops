@@ -7,9 +7,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // import red from '@material-ui/core/colors/red';
 
 // const primary = red[500]; // #F44336
-const primary = "#2a9d8f";
+// const primary = "#2a9d8f";
+const primary = "#4361EE";
+
 // const accent = purple['A200']; // #E040FB
-const accent = "#e76f51";
+// const accent = "#e76f51";
+const accent = "#66FBD1";
 // const accent = purple.A200; // #E040FB (alternative method)
 
 export default createMuiTheme({

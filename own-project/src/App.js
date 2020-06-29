@@ -15,6 +15,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
+import Info from '@material-ui/icons/Info';
+import Add from "@material-ui/icons/Add";
+import MailOutline from "@material-ui/icons/MailOutline";
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -74,11 +77,45 @@ class App extends Component {
 
                 <Typography gutterBottom variant="h4" component="h2">
 
-                  Livet!
+                  Livet
 
                 </Typography>
 
               </Link>
+
+              {/* linkt to ask for new activities */}
+              <Typography gutterBottom 
+                style = {{
+                  margin: 5,
+                }}
+
+                variant="body2" component="p" onClick={(e) => { e.preventDefault(); alert("Si no encontraste tu actividad favorita, escribe y reta al admin por no tenerla (broma, ¡trátalo con amor!). Enviale un email a leo.bravo.rain@gmail.com"); }}>
+
+                <Add/> Pedir Nueva actividad
+
+              </Typography>
+
+              <Typography gutterBottom
+                style={{
+                  margin: 5,
+                }}
+
+                variant="body2" component="p" onClick={(e) => { e.preventDefault(); alert("Si quieres agregar tu actividad, comunicate con el admin: leo.bravo.rain@gmail.com"); }}>
+
+                <MailOutline /> Ofrecer tu actividad
+
+              </Typography>
+              
+              {/* linkt to who we are */}
+              <Typography 
+                style={{
+                  margin: 5,
+                }}
+                gutterBottom variant="body2" component="p" onClick = {(e) => {e.preventDefault(); alert("Somos Livet, una plataforma que te ofrece las mejores actividades online y 100% en vivo, para que puedas entretenerte o aprender desde tu casa.\n¿Cómo funciona?\n Simple, escoges el taller que quieras tomar, escoges el horario y te comunicas directo con el profesor para coordinar la clase (nuestros profesores generalmente trabajan con plataformas como Zoom)");}}>
+
+                <Info/> Sobre Livet
+
+              </Typography>
 
             </Toolbar>
 

@@ -13,6 +13,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+
+// import Grid from '@material-ui/core/Grid';
 
 // import { fs } from "../../../config/firebase";
 
@@ -41,7 +44,13 @@ class WorkshopComponent extends React.Component {
             // add each workshop to the list of elements
             workshops.push(
 
-                <Grid item xs = {12} md = {3}>
+                <Grid item xs = {12} md = {3}
+                    // margin = {100}
+                    style = {{
+                        margin: 10,
+                    }}
+                    // elevation = {5}
+                >
 
                     <Card>
                         <CardActionArea>
@@ -69,7 +78,7 @@ class WorkshopComponent extends React.Component {
                         <CardActions>
 
                             <Button size="small" color="primary" 
-                            
+                                variant="contained"
                                 onClick={() => {
 
                                     console.log("redirecting");
@@ -78,7 +87,7 @@ class WorkshopComponent extends React.Component {
                                 
                                 }
                             }>
-                                Ver
+                                <PlayArrow/> Ver
                             </Button>
 
                         </CardActions>
